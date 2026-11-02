@@ -1,0 +1,68 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>오늘의 할일</title>
+  <link rel="stylesheet" href="css/style.css">
+  <script type="module" src="js/main.js"></script>
+</head>
+<body>
+  <main class="app">
+    <header class="header">
+      <div>
+        <h1>오늘의 할일</h1>
+        <p class="date" id="today-date"></p>
+      </div>
+      <button type="button" class="icon-btn" id="theme-toggle" aria-label="다크 모드로 전환">🌙</button>
+    </header>
+
+    <p class="notice" id="storage-notice" role="alert" hidden></p>
+
+    <section class="banner" id="carry-banner" hidden>
+      <p id="carry-text"></p>
+      <div class="banner-actions">
+        <button type="button" class="btn btn-primary" id="carry-accept">오늘로 가져오기</button>
+        <button type="button" class="btn" id="carry-dismiss">무시</button>
+      </div>
+    </section>
+
+    <form class="add-form" id="add-form" autocomplete="off">
+      <label for="new-todo" class="sr-only">새 할 일</label>
+      <input id="new-todo" type="text" maxlength="100" placeholder="할 일을 입력하세요...">
+      <button type="submit" class="btn btn-primary">추가</button>
+    </form>
+
+    <section class="progress" aria-live="polite">
+      <div class="progress-text">
+        <span id="progress-count"></span>
+        <span id="progress-percent"></span>
+      </div>
+      <div class="progress-bar" id="progress-bar" role="progressbar" aria-valuemin="0" aria-valuemax="100" aria-label="진행률">
+        <div class="progress-fill" id="progress-fill"></div>
+      </div>
+    </section>
+
+    <nav class="filters" id="filters" aria-label="필터">
+      <button type="button" data-filter="all">전체</button>
+      <button type="button" data-filter="active">진행 중</button>
+      <button type="button" data-filter="done">완료</button>
+    </nav>
+
+    <p class="celebrate" id="celebrate" hidden>오늘 할 일을 모두 끝냈어요! 🎉</p>
+
+    <ul class="todo-list" id="todo-list" aria-label="할 일 목록"></ul>
+    <p class="empty" id="empty" hidden></p>
+
+    <footer class="footer">
+      <p class="hint">Enter 추가 · 더블클릭 수정 · <kbd>/</kbd> 입력창으로 이동</p>
+      <button type="button" class="btn btn-text" id="clear-done">완료 항목 지우기</button>
+    </footer>
+  </main>
+
+  <div class="toast" id="toast" role="status" hidden>
+    <span>삭제됨</span>
+    <button type="button" id="undo">실행 취소</button>
+  </div>
+</body>
+</html>
