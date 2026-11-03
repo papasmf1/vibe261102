@@ -6,6 +6,12 @@
       "runtimeExecutable": "python",
       "runtimeArgs": ["-m", "http.server", "8123", "--bind", "127.0.0.1", "--directory", "todolist"],
       "port": 8123
+    },
+    {
+      "name": "demoport",
+      "runtimeExecutable": "python",
+      "runtimeArgs": ["-m", "http.server", "8080", "--bind", "127.0.0.1", "--directory", "DemoPort"],
+      "port": 8080
     }
   ]
 }
