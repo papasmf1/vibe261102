@@ -5,6 +5,7 @@
 실행:  python build_exe.py            (전체 빌드)
        python build_exe.py news       (네이버 뉴스 크롤러만)
        python build_exe.py kospi200   (코스피200 크롤러만)
+       python build_exe.py sp500      (S&P 500 분석기만)
 결과:  dist/<앱이름>.exe  (파이썬이 없는 PC에서도 실행 가능)
        dist/<앱이름>.zip  (배포용 압축 파일)
 """
@@ -20,6 +21,19 @@ import PyInstaller.__main__
 APPS = {
     "news": ("NaverNewsCrawler", "naver_news_crawler.py", "app.ico", "N"),
     "kospi200": ("Kospi200Crawler", "kospi200_crawler.py", "kospi200.ico", "K"),
+    "sp500": ("SP500Analyzer", "sp500_analysis.py", "sp500.ico", "S"),
+}
+
+# 앱별 추가 포함 파일 (exe 안에 함께 묶임, 없으면 건너뜀)
+EXTRA_DATA = {
+    "sp500": ["S&P 500 과거 데이터.csv"],  # 실행 시 바로 보여줄 샘플 데이터
+}
+
+# 앱별 추가 옵션
+EXTRA_ARGS = {
+    # matplotlib이 다른 Qt 바인딩까지 끌어오면 빌드가 중단되므로 PyQt6만 남기고 제외
+    "sp500": [arg for mod in ("PySide6", "PySide2", "PyQt5", "tkinter")
+              for arg in ("--exclude-module", mod)],
 }
 
 BASE_DIR = os.path.dirname(os.path.abspath(__file__))
@@ -61,6 +75,13 @@ def build(key):
     if not os.path.exists(icon):
         make_icon(icon, letter)
 
+    extra = []
+    for data in EXTRA_DATA.get(key, []):
+        if os.path.exists(data):
+            extra += ["--add-data", f"{data}{os.pathsep}."]
+        else:
+            print(f"경고: {data} 파일이 없어 포함하지 않습니다.")
+
     PyInstaller.__main__.run([
         script,
         "--name", app_name,
@@ -70,6 +91,8 @@ def build(key):
         "--add-data", f"{icon}{os.pathsep}.",  # 실행 중 창 아이콘으로도 사용
         "--noconfirm",
         "--clean",
+        *extra,
+        *EXTRA_ARGS.get(key, []),
     ])
 
     exe_path = os.path.join("dist", f"{app_name}.exe")
