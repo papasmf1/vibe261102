@@ -7,3 +7,9 @@ __pycache__/
 
 # 계정 정보 (업로드 금지)
 cred.txt
+
+# 크롤링 결과 파일 (앱이 생성하는 데이터)
+kospi200*.csv
+kospi200*.xlsx
+naver_news*.csv
+naver_news*.xlsx
