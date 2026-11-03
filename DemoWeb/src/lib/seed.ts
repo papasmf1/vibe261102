@@ -5,7 +5,7 @@ const featured: Array<Pick<Post, "title" | "author" | "content">> = [
     title: "DemoWeb 게시판에 오신 것을 환영합니다",
     author: "관리자",
     content:
-      "Next.js App Router와 shadcn/ui로 만든 데모 게시판입니다.\n\n글쓰기, 수정, 삭제, 댓글 기능을 자유롭게 사용해 보세요. 데이터는 data/board.json 파일에 저장됩니다.",
+      "Next.js App Router와 shadcn/ui로 만든 데모 게시판입니다.\n\n글쓰기, 수정, 삭제, 댓글 기능을 자유롭게 사용해 보세요. 데이터는 Neon(PostgreSQL) 데이터베이스에 저장됩니다.",
   },
   {
     title: "Server Actions로 폼 처리하기",
