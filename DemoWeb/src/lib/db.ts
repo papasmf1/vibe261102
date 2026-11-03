@@ -5,11 +5,14 @@ import { neon } from "@neondatabase/serverless";
 import { createSeedData } from "./seed";
 import type { Comment, Post, SearchField } from "./types";
 
-if (!process.env.DATABASE_URL) {
+// 배포 환경 변수에 .env 형식 그대로 따옴표까지 붙여 넣는 경우가 있어 앞뒤 공백과 따옴표를 걷어 낸다.
+const databaseUrl = process.env.DATABASE_URL?.trim().replace(/^(["'])(.*)\1$/, "$2");
+
+if (!databaseUrl) {
   throw new Error("DATABASE_URL 환경 변수가 없습니다. .env.local에 Neon 접속 문자열을 넣어 주세요.");
 }
 
-const sql = neon(process.env.DATABASE_URL);
+const sql = neon(databaseUrl);
 
 export const PAGE_SIZE = 10;
 
