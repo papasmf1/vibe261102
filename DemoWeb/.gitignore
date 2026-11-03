@@ -1,0 +1,12 @@
+/node_modules
+/.next/
+/out/
+/build
+*.tsbuildinfo
+next-env.d.ts
+.env*
+npm-debug.log*
+.DS_Store
+
+# 실행 중 생성되는 게시판 데이터 (시드에서 자동 생성됨)
+/data/*.json
