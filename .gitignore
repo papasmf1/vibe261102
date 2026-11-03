@@ -1,0 +1,9 @@
+# PyInstaller 빌드 결과물
+build/
+dist/
+*.spec
+
+__pycache__/
+
+# 계정 정보 (업로드 금지)
+cred.txt
